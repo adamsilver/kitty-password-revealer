@@ -1,0 +1,28 @@
+{
+  "name": "kitty-password-revealer",
+  "version": "0.0.0",
+  "homepage": "https://github.com/adamsilver/kitty-password-revealer",
+  "authors": [
+    "Adam Silver <adambsilver@gmail.com>"
+  ],
+  "description": "Creates a button to reveal the password when typing in a password field",
+  "main": "src/kitty.PasswordRevealer.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "kitty",
+    "password"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "kitty-base": "*"
+  }
+}

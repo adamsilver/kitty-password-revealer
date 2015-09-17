@@ -1,0 +1,13 @@
+{
+	"name": "kitty-password-revealer",
+	"version": "0.0.0",
+	"author": "Adam Silver",
+	"repository": {},
+	"dependencies": {},
+  	"devDependencies": {
+		"grunt": "^0.4.5",
+		"grunt-contrib-jasmine": "^0.6.5",
+		"grunt-contrib-jshint": "0.6.3",
+		"grunt-jscs-checker": "0.6.0"
+	}
+}
