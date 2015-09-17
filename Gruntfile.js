@@ -11,7 +11,10 @@ module.exports = function(grunt) {
 			],
 			options: {
 				specs: ['test/kitty.PasswordRevealer.spec.js'],
-				vendor: ['bower_components/kitty-base/src/kitty.js'],
+				vendor: [
+					'bower_components/jquery/dist/jquery.js',
+					'bower_components/kitty-base/src/kitty.js'
+				],
 				keepRunner: true
 			}
 		}
