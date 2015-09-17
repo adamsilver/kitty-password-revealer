@@ -23,6 +23,7 @@
     "tests"
   ],
   "dependencies": {
+    "jquery": "^1",
     "kitty-base": "*"
   }
 }
