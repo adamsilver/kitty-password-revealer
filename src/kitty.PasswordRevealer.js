@@ -8,12 +8,13 @@ kitty.PasswordRevealer = function(el) {
 };
 
 kitty.PasswordRevealer.prototype.createButton = function() {
-	this.button = $('<button class="revealPassword">'+this.showText+'</button>');
+	this.button = $('<a class="revealPassword" href="#">'+this.showText+'</a>');
 	this.passwordControl.parent().append(this.button);
 	this.button.on('click', $.proxy(this, 'onButtonClicked'));
 };
 
 kitty.PasswordRevealer.prototype.onButtonClicked = function(e) {
+	e.preventDefault();
 	if(this.showingPassword) {
 		this.hidePassword();
 	} else {

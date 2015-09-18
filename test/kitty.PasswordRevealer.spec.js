@@ -6,24 +6,27 @@ describe("Password Revealer", function() {
 	var mockWrapper;
 	var mockButton;
 	var mockProxy = {};
+	var buttonHtml = '<a class="revealPassword" href="#">Show password</a>';
+	var mockEvent;
 
 	beforeEach(function () {
-		mockPasswordControl = jasmine.createSpyObj("mockPasswordControl", [
+		mockPasswordControl = jasmine.createSpyObj('mockPasswordControl', [
 			'parent',
 		]);
-		mockWrapper = jasmine.createSpyObj("mockWrapper", [
+		mockWrapper = jasmine.createSpyObj('mockWrapper', [
 			'append'
 		]);
-		mockButton = jasmine.createSpyObj("mockButton", [
+		mockButton = jasmine.createSpyObj('mockButton', [
 			'on',
 			'text'
 		]);
+		mockEvent = jasmine.createSpyObj('mockEvent', ["preventDefault"]);
 		mockPasswordControl.parent.and.returnValue(mockWrapper);
 		spyOn(window, '$').and.callFake(function(arg) {
 			if(arg === mockEl) {
 				return mockPasswordControl;
 			}
-			if(arg === '<button class="revealPassword">Show password</button>') {
+			if(arg === buttonHtml) {
 				return mockButton;
 			}
 		});
@@ -42,15 +45,21 @@ describe("Password Revealer", function() {
 			expect(passwordRevealer.showingPassword).toBe(false);
 		});
 		it("Creates a button", function() {
-			expect($).toHaveBeenCalledWith('<button class="revealPassword">Show password</button>');
+			expect($).toHaveBeenCalledWith(buttonHtml);
 			expect(mockButton.on).toHaveBeenCalledWith('click', mockProxy);
 		});
 	});
 
 	describe("Clicking the show password button", function() {
+		describe("Always", function() {
+			it("Prevents default", function() {
+				passwordRevealer.onButtonClicked(mockEvent);
+				expect(mockEvent.preventDefault).toHaveBeenCalled();
+			});
+		});
 		describe("The passowrd is hidden", function() {
 			beforeEach(function() {
-				passwordRevealer.onButtonClicked();
+				passwordRevealer.onButtonClicked(mockEvent);
 			});
 			it("Reveals the password", function() {
 				expect(mockEl.type).toBe("text");
@@ -65,7 +74,7 @@ describe("Password Revealer", function() {
 		describe("The password is showing", function() {
 			beforeEach(function() {
 				passwordRevealer.showingPassword = true;
-				passwordRevealer.onButtonClicked();
+				passwordRevealer.onButtonClicked(mockEvent);
 			});
 			it("Hides the password", function() {
 				expect(mockEl.type).toBe("password");
